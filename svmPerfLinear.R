@@ -1,5 +1,7 @@
 require('Matrix')
 require('sparsio')
+require('caret')
+require('e1071')
 
 svmPerfLinear <- getModelInfo("svmLinear", regex = FALSE)[[1]]
 
@@ -60,9 +62,12 @@ svmPerfLinear$prob <- function (modelFit, newdata, submodels = NULL) {
         pred <- read.csv(out$predfile, header=FALSE)[,1]
         file.remove(out$predfile)
 
-        # return crisp probabilities
-        y <- ifelse(pred>0,1,0)
+        # return pseudo-probabilities by taking sigmoid of the soft assignments
+        y <- sigmoid(pred)
+        y <- cbind(y, 1/y)
+        colnames(y) <- modelFit$lev
         attr(y, "probabilities")
+        y
 }
 
 svmPerfLinear$grid <- function(x, y, len = NULL, search = "grid") {
