@@ -3,8 +3,8 @@ require('sparsio')
 
 svmPerfLinear <- getModelInfo("svmLinear", regex = FALSE)[[1]]
 
-svmPerfLinear$learn <- '/data/BnB2/TOOLS/SVMperf/svm_perf_learn'
-svmPerfLinear$classify <- '/data/BnB2/TOOLS/SVMperf/svm_perf_classify'
+svmPerfLinear$learn <- 'pathto/SVMperf/svm_perf_learn'
+svmPerfLinear$classify <- 'pathto/SVMperf/svm_perf_classify'
 
 svmPerfLinear$method <- "svmPerfLinear"
 svmPerfLinear$type <- c("Classification")
