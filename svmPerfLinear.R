@@ -64,7 +64,7 @@ svmPerfLinear$prob <- function (modelFit, newdata, submodels = NULL) {
 
         # return pseudo-probabilities by taking sigmoid of the soft assignments
         y <- sigmoid(pred)
-        y <- cbind(y, 1/y)
+        y <- cbind(y, 1-y)
         colnames(y) <- modelFit$lev
         attr(y, "probabilities")
         y
